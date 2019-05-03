@@ -2,29 +2,35 @@
 # Enable DNS on the switch and configure DNS server addresses
 ip domain-lookup
 {% if item.dns_server_address != "" %}
-    ip domain-lookup {{item.dns_server_address}} vrf management
+ip domain-lookup {{item.dns_server_address}} vrf management
 {% endif %}
 
 # Enable NTP and configure the NTP server address
 ntp enable
 {% if item.ntp_server_address != "" %}
-    ntp server {{item.ntp_server_address}} mgt-port
+ntp server {{item.ntp_server_address}} mgt-port
 {% endif %}
 
 # Configure routed interfaces for ECMP
+{% if item.interface_ecmp_1 != "" %}
 interface ethernet {{item.interface_ecmp_1}}
 no switchport
 ip address {{item.ip_address_with_mask_1}}
 exit
+{% endif %}
+{% if item.interface_ecmp_2 != "" %}
 interface ethernet {{item.interface_ecmp_2}}
 no switchport
 ip address {{item.ip_address_with_mask_2}}
 exit
+{% endif %}
 
-# Assign the hardware VTEP an IP address. Loopback prefered
+# Assign the hardware VTEP an IP address. Loopback prefereditem.vtep_interface
+{% if item.vtep_interface != "" %}
 interface {{item.vtep_interface}} 
 ip address {{item.ip_address_with_mask_vtep}}
 exit
+{% endif %}
 
 # Setup commands to make sure that excution does not fail
 no hsc mode
@@ -32,15 +38,21 @@ username {{item.vtep_username}} password {{item.vtep_password}} role network-adm
 
 # Configure the Controller
 hsc vtep
+{% if item.controller_ip_address != "" %}
 controller ip {{item.controller_ip_address}}
 controller port {{item.controller_port}}
 controller vrf default
+{% endif %}
 
 # Configure the local VXLAN TEP IP address
+{% if item.vxlan_tep_ip_address != "" %}
 tunnel ip {{item.vxlan_tep_ip_address}}
+{% endif %}
 
 # Configure VXLAN on the switch ports that physically participate in the virtual network
+{% if item.vxlan_interfaces != "" %}
 vtep {{item.vtep_instance_id}} vxlan-ports {{item.vxlan_interfaces}} 
+{% endif %}
 
 # Configure the username and password of the VTEP instance
 vtep {{item.vtep_instance_id}} username {{item.vtep_username}} password {{item.vtep_password}}
