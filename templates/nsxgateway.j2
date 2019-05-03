@@ -22,6 +22,10 @@ interface {{item.vtep_interface}}
 ip address {{item.ip_address_with_mask_vtep}}
 exit
 
+# Setup commands to make sure that excution does not fail
+no hsc mode
+username {{item.vtep_username}} password {{item.vtep_password}} role network-admin
+
 # Configure the Controller
 hsc vtep
 controller ip {{item.controller_ip_address}}
