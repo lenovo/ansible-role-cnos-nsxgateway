@@ -1,11 +1,15 @@
 # Configure the DNS and NTP server addresses to get the correct time.
 # Enable DNS on the switch and configure DNS server addresses
 ip domain-lookup
-ip domain-lookup {{item.dns_server_address}} vrf management
+{% if item.dns_server_address != "" %}
+    ip domain-lookup {{item.dns_server_address}} vrf management
+{% endif %}
 
 # Enable NTP and configure the NTP server address
 ntp enable
-ntp server {{item.ntp_server_address}} mgt-port
+{% if item.ntp_server_address != "" %}
+    ntp server {{item.ntp_server_address}} mgt-port
+{% endif %}
 
 # Configure routed interfaces for ECMP
 interface ethernet {{item.interface_ecmp_1}}
