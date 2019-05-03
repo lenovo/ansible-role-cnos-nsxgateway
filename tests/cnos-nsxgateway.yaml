@@ -1,0 +1,8 @@
+# Common code to configure all spine switches
+ - name: Module to Configure Lenovo Tier1 Spine Switch
+   hosts: nsxgateway-standalone
+   gather_facts: no
+   connection: network_cli
+
+   roles:
+    - cnos-nsxgateway-standalone

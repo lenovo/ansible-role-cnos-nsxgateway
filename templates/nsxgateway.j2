@@ -1,0 +1,45 @@
+# Configure the DNS and NTP server addresses to get the correct time.
+# Enable DNS on the switch and configure DNS server addresses
+ip domain-lookup
+ip domain-lookup {{item.dns_server_address}} vrf management
+
+# Enable NTP and configure the NTP server address
+ntp enable
+ntp server {{item.ntp_server_address}} mgt-port
+
+# Configure routed interfaces for ECMP
+interface ethernet {{item.interface_ecmp_1}}
+no switchport
+ip address {{item.ip_address_with_mask_1}}
+exit
+interface ethernet {{item.interface_ecmp_2}}
+no switchport
+ip address {{item.ip_address_with_mask_2}}
+exit
+
+# Assign the hardware VTEP an IP address. Loopback prefered
+interface {{item.vtep_interface}} 
+ip address {{item.ip_address_with_mask_vtep}}
+exit
+
+# Configure the Controller
+hsc vtep
+controller ip {{item.controller_ip_address}}
+controller port {{item.controller_port}}
+controller vrf default
+
+# Configure the local VXLAN TEP IP address
+tunnel ip {{item.vxlan_tep_ip_address}}
+
+# Configure VXLAN on the switch ports that physically participate in the virtual network
+vtep {{item.vtep_instance_id}} vxlan-ports {{item.vxlan_interfaces}} 
+
+# Configure the username and password of the VTEP instance
+vtep {{item.vtep_instance_id}} username {{item.vtep_username}} password {{item.vtep_password}}
+exit
+
+# Enable the VXLAN Gateway
+hsc mode vtep
+
+#Show command to verify connection
+show hsc ovsdb connection

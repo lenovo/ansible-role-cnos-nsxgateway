@@ -1,0 +1,17 @@
+---
+ nsxgateway_standalone_data:
+ - {dns_server_address: "",
+ntp_server_address: "",
+interface_ecmp_1: "",
+ip_address_with_mask_1: "",
+interface_ecmp_2: "",
+ip_address_with_mask_2: "",
+vtep_interface: "",
+ip_address_with_mask_vtep: "",
+controller_ip_address: "",
+controller_port: 66,
+vxlan_tep_ip_address: "",
+vtep_instance_id: 1,
+vxlan_interfaces: "",
+vtep_username: "",
+vtep_password: ""}
