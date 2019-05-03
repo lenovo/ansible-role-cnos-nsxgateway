@@ -1,0 +1,17 @@
+# This contain tasks to configure VLAG Tier1 Spine switches and further show it
+---
+- name: Replace NSX Gateway Configuration Template with values
+  template: src=nsxgateway.j2 dest=./commands/nsxgateway_{{ inventory_hostname }}_commands.txt
+  with_items: "{{ nsxgateway_standalone_data }}"
+
+- name: Applying CLI commands on VLAG Tier1 Spine Switches
+  cnos_template:
+      host: "{{ inventory_hostname }}"
+      username: "{{ hostvars[inventory_hostname]['ansible_ssh_user']}}"
+      password: "{{ hostvars[inventory_hostname]['ansible_ssh_pass']}}"
+      deviceType: "{{ hostvars[inventory_hostname]['deviceType']}}"
+      commandfile: ./commands/nsxgateway_{{ inventory_hostname }}_commands.txt
+      outputfile: ./results/nsxgateway_{{ inventory_hostname }}_output.txt
+  with_items: "{{ nsxgateway_standalone_data }}"
+
+# Completed file
