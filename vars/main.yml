@@ -1,15 +1,17 @@
 ---
+# Values given here are just indicative.
+# It has to be replaced with appropriate values before execution.
  nsxgateway_standalone_data:
- - {dns_server_address: "<add dns server ip>",
-ntp_server_address: "<add dns server ip>",
-interface_ecmp_1: "",
-ip_address_with_mask_1: "",
-interface_ecmp_2: "",
-ip_address_with_mask_2: "",
-vtep_interface: "",
-ip_address_with_mask_vtep: "",
-controller_ip_address: "",
-controller_port: 66,
+ - {dns_server_address: "8.8.8.8",
+ntp_server_address: "139.58.50.38",
+interface_ecmp_1: "Ethernet 1/1",
+ip_address_with_mask_1: "10.241.107.1/24",
+interface_ecmp_2: "Ethernet 1/2",
+ip_address_with_mask_2: "10.241.106.1/24",
+vtep_interface: "loopback1",
+ip_address_with_mask_vtep: "10.241.105.2 255.255.255.255",
+controller_ip_address: "10.241.5.91",
+controller_port: 6640,
 vxlan_tep_ip_address: "10.6.2.1",
 vtep_instance_id: 1,
 vxlan_interfaces: "ethernet 1/33",
