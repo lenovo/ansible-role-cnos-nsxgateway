@@ -1,7 +1,7 @@
 ---
  nsxgateway_standalone_data:
- - {dns_server_address: "",
-ntp_server_address: "",
+ - {dns_server_address: "<add dns server ip>",
+ntp_server_address: "<add dns server ip>",
 interface_ecmp_1: "",
 ip_address_with_mask_1: "",
 interface_ecmp_2: "",
@@ -10,8 +10,8 @@ vtep_interface: "",
 ip_address_with_mask_vtep: "",
 controller_ip_address: "",
 controller_port: 66,
-vxlan_tep_ip_address: "",
+vxlan_tep_ip_address: "10.6.2.1",
 vtep_instance_id: 1,
-vxlan_interfaces: "",
-vtep_username: "",
-vtep_password: ""}
+vxlan_interfaces: "ethernet 1/33",
+vtep_username: "anil",
+vtep_password: "Lab4man1"}
