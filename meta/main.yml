@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Anil Kumar Muraleedharan
-  description: The cnos-nsxgateway-standalone role facilitates the configuration of
+  description: The cnos-nsxgateway role facilitates the configuration of
    a VXLAN Gateway for VMware NSX. The role applies to VXLAN-GW in a standalone switch
    acting as VTEP C
   company: Lenovo
